@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>RouteSentry Settings</title><style>body { margin: 0; } input::placeholder { color:#747d8b; } button:disabled { opacity:.47; cursor:default; } [hidden] { display:none !important; }</style></head><body>
+
+<main style="width:676px;height:584px;box-sizing:border-box;display:flex;flex-direction:column;overflow:hidden;border:1px solid #c5ccd7;border-radius:15px;background:#f5f6f9;color:#172334;font-family:-apple-system,BlinkMacSystemFont,system-ui,sans-serif">
+  <header style="display:flex;align-items:center;gap:12px;padding:0 17px;height:49px;flex:none;border-bottom:1px solid #dce1ea;background:#fdfdfe">
+    <div aria-hidden="true" style="display:flex;align-items:center;gap:7px"><span style="width:11px;height:11px;border:1px solid #e9554e;border-radius:50%;background:#ff615a;box-sizing:border-box"></span><span style="width:11px;height:11px;border:1px solid #dfa434;border-radius:50%;background:#ffbd2e;box-sizing:border-box"></span><span style="width:11px;height:11px;border:1px solid #26ac44;border-radius:50%;background:#28c840;box-sizing:border-box"></span></div><span style="font-size:13px;font-weight:640;margin-left:1px">RouteSentry Settings</span>
+    <a href="artboards/Apple-Home.html" style="display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:0 12px;height:29px;border:1px solid #c8ccd4;border-radius:7px;background:linear-gradient(#ffffff,#f7f8fa);color:#253142;box-shadow:0 1px 1px #202d4010;font:500 12px -apple-system,BlinkMacSystemFont,system-ui,sans-serif;cursor:pointer;box-sizing:border-box;text-decoration:none;white-space:nowrap;border-color:#1769db;background:linear-gradient(#2d88ff,#1166dc);color:#ffffff;text-shadow:0 1px 1px #0047ac30;margin-left:auto" jc-focus="outline:3px solid #6ca8ff;outline-offset:2px" jc-hover="filter:brightness(.96)">Done</a>
+  </header>
+  <div style="flex:1;min-height:0;overflow:auto;display:flex;flex-direction:column;gap:13px;padding:20px 24px 18px">
+    <div style="display:flex;flex-direction:column;gap:4px"><h1 style="margin:0;font-size:21px;line-height:1.2;letter-spacing:-.44px;font-weight:675">Address Rules</h1><p style="margin:0;color:#566376;font-size:12px">Choose which destinations work with the VPN on or off.</p></div>
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;background:#ffffff;border:1px solid #dfe3eb;border-radius:9px;padding:8px 12px">
+      <label for="vpn-profile" style="font-size:12px;font-weight:590">VPN Profile</label>
+      <select id="vpn-profile" style="min-width:128px;height:26px;padding:0 6px;border:1px solid #c8ccd4;border-radius:6px;background:#f8f9fb;color:#243044;font:12px -apple-system,system-ui,sans-serif" jc-focus="outline:3px solid #6ca8ff;outline-offset:2px"><option value="auto">Automatic</option><option value="route">Routed tunnel</option><option id="custom-profile" value="demo-profile">Specific VPN profile</option></select>
+    </div>
+    <section aria-label="Rule lists" style="display:flex;flex-direction:column;background:#ffffff;border:1px solid #dfe3eb;border-radius:10px;overflow:hidden">
+      <div role="tablist" aria-label="VPN rule list" style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:3px;margin:12px 14px 0;padding:3px;border-radius:8px;background:#eceff4">
+        <button id="vpn_only-tab" type="button" role="tab" aria-selected="true" aria-controls="vpn_only-panel" style="height:27px;padding:0;border:0;border-radius:6px;background:#ffffff;color:#172334;box-shadow:0 1px 3px #29394d2b;font:560 12px -apple-system,system-ui,sans-serif;cursor:pointer" jc-focus="outline:3px solid #6ca8ff;outline-offset:2px">VPN On Only <span id="vpn_only-count" style="margin-left:4px;color:#647083;font-size:10px">3</span></button>
+        <button id="not_vpn_only-tab" type="button" role="tab" aria-selected="false" aria-controls="not_vpn_only-panel" style="height:27px;padding:0;border:0;border-radius:6px;background:transparent;color:#526071;font:560 12px -apple-system,system-ui,sans-serif;cursor:pointer" jc-focus="outline:3px solid #6ca8ff;outline-offset:2px">VPN Off Only <span id="not_vpn_only-count" style="margin-left:4px;color:#647083;font-size:10px">2</span></button>
+      </div>
+
+<section id="vpn_only-panel" role="tabpanel" aria-labelledby="vpn_only-tab"  style="display:flex;flex-direction:column;gap:9px;padding:14px 15px;min-width:0">
+  <div style="display:flex;flex-direction:column;gap:4px"><h3 style="margin:0;font-size:14px;font-weight:640">Allow only through the VPN</h3><p style="margin:0;color:#586575;font-size:12px">These addresses are blocked outside the VPN tunnel.</p></div>
+  <form id="vpn_only-form" style="display:flex;flex-direction:column;gap:5px;margin:2px 0 0">
+    <label for="vpn_only-input" style="font-size:11px;color:#495769;font-weight:560">Add addresses</label>
+    <div style="display:flex;align-items:center;gap:8px">
+      <input id="vpn_only-input" type="text" placeholder="example.com, 203.0.113.10" autocomplete="off" spellcheck="false" aria-invalid="false" aria-describedby="vpn_only-feedback" style="flex:1;min-width:0;height:32px;box-sizing:border-box;border:1px solid #c9cdd6;border-radius:7px;background:#ffffff;color:#172334;padding:0 9px;box-shadow:inset 0 1px 2px #29394d0a;font:12px -apple-system,system-ui,sans-serif" jc-focus="outline:3px solid #6ca8ff;outline-offset:2px" jc-invalid="border-color:#ca4554">
+      <button id="vpn_only-add" type="submit" disabled style="display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:0 12px;height:29px;border:1px solid #c8ccd4;border-radius:7px;background:linear-gradient(#ffffff,#f7f8fa);color:#253142;box-shadow:0 1px 1px #202d4010;font:500 12px -apple-system,BlinkMacSystemFont,system-ui,sans-serif;cursor:pointer;box-sizing:border-box;text-decoration:none;white-space:nowrap;border-color:#1769db;background:linear-gradient(#2d88ff,#1166dc);color:#ffffff;text-shadow:0 1px 1px #0047ac30;height:32px;min-width:62px" jc-focus="outline:3px solid #6ca8ff;outline-offset:2px" jc-hover="filter:brightness(.96)">Add</button>
+    </div>
+    <p id="vpn_only-feedback" aria-live="polite" style="margin:0;min-height:16px;color:#626974;font-size:11px;line-height:1.35;overflow-wrap:anywhere">Separate multiple addresses with commas or new lines.</p>
+  </form>
+  <div style="position:relative;padding-top:8px;border-top:1px solid #e6e9ef">
+    <div id="vpn_only-chips" aria-label="Allow only through the VPN addresses" data-jc-opaque data-jc-label="Removable address chips" style="width:100%;height:65px;overflow:auto;display:flex;align-items:flex-start;align-content:flex-start;flex-wrap:wrap;gap:6px"></div>
+    <p id="vpn_only-empty" style="position:absolute;top:8px;left:0;margin:0;color:#5b697b;font-size:12px">No addresses yet.</p>
+  </div>
+</section>
+
+<section id="not_vpn_only-panel" role="tabpanel" aria-labelledby="not_vpn_only-tab" hidden style="display:flex;flex-direction:column;gap:9px;padding:14px 15px;min-width:0">
+  <div style="display:flex;flex-direction:column;gap:4px"><h3 style="margin:0;font-size:14px;font-weight:640">Allow only with the VPN off</h3><p style="margin:0;color:#586575;font-size:12px">These addresses are blocked while the VPN is connected.</p></div>
+  <form id="not_vpn_only-form" style="display:flex;flex-direction:column;gap:5px;margin:2px 0 0">
+    <label for="not_vpn_only-input" style="font-size:11px;color:#495769;font-weight:560">Add addresses</label>
+    <div style="display:flex;align-items:center;gap:8px">
+      <input id="not_vpn_only-input" type="text" placeholder="intranet.example.net" autocomplete="off" spellcheck="false" aria-invalid="false" aria-describedby="not_vpn_only-feedback" style="flex:1;min-width:0;height:32px;box-sizing:border-box;border:1px solid #c9cdd6;border-radius:7px;background:#ffffff;color:#172334;padding:0 9px;box-shadow:inset 0 1px 2px #29394d0a;font:12px -apple-system,system-ui,sans-serif" jc-focus="outline:3px solid #6ca8ff;outline-offset:2px" jc-invalid="border-color:#ca4554">
+      <button id="not_vpn_only-add" type="submit" disabled style="display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:0 12px;height:29px;border:1px solid #c8ccd4;border-radius:7px;background:linear-gradient(#ffffff,#f7f8fa);color:#253142;box-shadow:0 1px 1px #202d4010;font:500 12px -apple-system,BlinkMacSystemFont,system-ui,sans-serif;cursor:pointer;box-sizing:border-box;text-decoration:none;white-space:nowrap;border-color:#1769db;background:linear-gradient(#2d88ff,#1166dc);color:#ffffff;text-shadow:0 1px 1px #0047ac30;height:32px;min-width:62px" jc-focus="outline:3px solid #6ca8ff;outline-offset:2px" jc-hover="filter:brightness(.96)">Add</button>
+    </div>
+    <p id="not_vpn_only-feedback" aria-live="polite" style="margin:0;min-height:16px;color:#626974;font-size:11px;line-height:1.35;overflow-wrap:anywhere">Separate multiple addresses with commas or new lines.</p>
+  </form>
+  <div style="position:relative;padding-top:8px;border-top:1px solid #e6e9ef">
+    <div id="not_vpn_only-chips" aria-label="Allow only with the VPN off addresses" data-jc-opaque data-jc-label="Removable address chips" style="width:100%;height:65px;overflow:auto;display:flex;align-items:flex-start;align-content:flex-start;flex-wrap:wrap;gap:6px"></div>
+    <p id="not_vpn_only-empty" style="position:absolute;top:8px;left:0;margin:0;color:#5b697b;font-size:12px">No addresses yet.</p>
+  </div>
+</section>
+    </section>
+    <div style="display:flex;flex-direction:column;gap:6px;background:#ffffff;border:1px solid #dfe3eb;border-radius:9px;padding:9px 12px">
+      <div style="display:flex;align-items:center;gap:9px"><span aria-hidden="true" style="width:26px;height:26px;display:grid;place-items:center;border-radius:6px;background:#e8f1ff;color:#1767cf"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h8l4 4v13H6V3Zm8 0v5h4M9 12h6m-6 4h6"/></svg></span><div style="display:flex;flex-direction:column;gap:3px"><span style="font-size:12px;font-weight:600">Import Configuration</span><span style="font-size:11px;color:#596679">Replace both lists from a JSON file.</span></div><button id="choose-file" type="button" style="display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:0 12px;height:29px;border:1px solid #c8ccd4;border-radius:7px;background:linear-gradient(#ffffff,#f7f8fa);color:#253142;box-shadow:0 1px 1px #202d4010;font:500 12px -apple-system,BlinkMacSystemFont,system-ui,sans-serif;cursor:pointer;box-sizing:border-box;text-decoration:none;white-space:nowrap;margin-left:auto" jc-focus="outline:3px solid #6ca8ff;outline-offset:2px" jc-hover="background:#edf3fc">Choose File…</button><input id="import-file" type="file" accept=".json,application/json" aria-label="JSON configuration file" hidden></div>
+      <p id="import-status" aria-live="polite" style="margin:0;color:#5d6b7d;font-size:11px;line-height:1.4;overflow-wrap:anywhere"></p>
+    </div>
+    <label style="display:flex;align-items:center;justify-content:space-between;gap:12px;background:#ffffff;border:1px solid #dfe3eb;border-radius:9px;padding:10px 12px;font-size:12px;font-weight:590"><span>Launch at Login</span><input id="launch-at-login" type="checkbox" aria-label="Launch at Login" style="accent-color:#1674ea;width:14px;height:14px;margin:0 2px 0 0"></label>
+  </div>
+</main>
+<script>const byId = id => document.getElementById(id);
+const keys = ['vpn_only', 'not_vpn_only'];
+const titles = {vpn_only: 'VPN On Only', not_vpn_only: 'VPN Off Only'};
+const session = window.jc?.session ?? {};
+const sample = {vpn_only: ['example.com', 'api.example.com', '203.0.113.0/24'], not_vpn_only: ['intranet.example.net', '192.0.2.10']};
+const saved = session.routeRules ?? sample;
+const lists = {vpn_only: saved.vpn_only.map(address), not_vpn_only: saved.not_vpn_only.map(address)};
+const hint = 'Separate multiple addresses with commas or new lines.';
+
+function address(token) {
+  const [host, bits, extra] = token.split('/');
+  if (extra !== undefined || (bits !== undefined && !/^\d{1,3}$/.test(bits))) return null;
+  let ip = null;
+  const v4 = host.split('.');
+  if (v4.length === 4 && v4.every(part => /^(0|[1-9]\d{0,2})$/.test(part) && Number(part) < 256)) {
+    ip = {version: 4, canonical: v4.join('.'), value: v4.reduce((value, part) => (value << 8n) + BigInt(part), 0n)};
+  } else if (/^[\da-f:.]+$/i.test(host) && host.includes(':')) {
+    try {
+      const canonical = new URL(`http://[${host}]/`).hostname.slice(1, -1);
+      const halves = canonical.split('::');
+      const left = halves[0] ? halves[0].split(':') : [];
+      const right = halves[1] ? halves[1].split(':') : [];
+      const groups = halves.length === 1 ? left : [...left, ...Array(8 - left.length - right.length).fill('0'), ...right];
+      ip = {version: 6, canonical, value: groups.reduce((value, part) => (value << 16n) + BigInt(`0x${part}`), 0n)};
+    } catch { return null; }
+  }
+  if (ip) {
+    const width = ip.version === 4 ? 32 : 128;
+    const prefix = bits === undefined ? width : Number(bits);
+    if (prefix > width) return null;
+    const span = 1n << BigInt(width - prefix);
+    if (ip.value % span !== 0n) return null;
+    return {text: bits === undefined ? ip.canonical : `${ip.canonical}/${prefix}`,
+      kind: ip.version, first: ip.value, last: ip.value + span - 1n};
+  }
+  if (bits !== undefined || /[\x00-\x20*%?#@:\[\]\\]/.test(host)) return null;
+  try {
+    const domain = new URL(`http://${host}/`).hostname.toLowerCase().replace(/\.$/, '');
+    const labels = domain.split('.');
+    if (domain.length > 253 || labels.length < 2 || /^\d+$/.test(labels.at(-1))
+      || labels.some(label => !/^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?$/.test(label))) return null;
+    return {text: domain, kind: 'domain'};
+  } catch { return null; }
+}
+
+function exactMatch(a, b) {
+  if (a.kind !== b.kind) return false;
+  return a.kind === 'domain' ? a.text === b.text : a.first === b.first && a.last === b.last;
+}
+
+function overlaps(a, b) {
+  if (a.kind !== b.kind) return false;
+  return a.kind === 'domain' ? a.text === b.text : a.first <= b.last && b.first <= a.last;
+}
+
+function validate(token, current, opposite, oppositeTitle) {
+  if (token.includes('://')) return {error: `Use the domain only for “${token}”.`};
+  const entry = address(token);
+  if (!entry) return {error: `“${token}” is not a valid domain, IP, or CIDR.`};
+  if (current.some(item => exactMatch(item, entry))) return {error: `“${entry.text}” is already in this list.`};
+  const conflict = opposite.find(item => overlaps(item, entry));
+  if (conflict) return {error: `“${entry.text}” overlaps “${conflict.text}” in ${oppositeTitle}.`};
+  return {entry};
+}
+
+function render(key) {
+  const chips = byId(`${key}-chips`);
+  chips.replaceChildren();
+  for (const entry of lists[key]) {
+    const chip = document.createElement('span');
+    chip.setAttribute('style', 'display:inline-flex;align-items:center;gap:5px;min-width:0;max-width:100%;height:29px;padding:0 4px 0 10px;background:#f0f2f5;border:1px solid #e1e4ea;border-radius:8px;box-sizing:border-box');
+    const label = document.createElement('span');
+    label.textContent = entry.text;
+    label.title = entry.text;
+    label.setAttribute('style', 'font:12px ui-monospace,monospace;overflow:hidden;text-overflow:ellipsis;white-space:nowrap');
+    const remove = document.createElement('button');
+    remove.type = 'button';
+    remove.setAttribute('aria-label', `Remove ${entry.text}`);
+    remove.setAttribute('style', 'width:22px;height:22px;flex:none;padding:0;border:0;border-radius:4px;background:transparent;color:#bc2634;font:18px/1 system-ui;cursor:pointer');
+    remove.textContent = '×';
+    remove.addEventListener('mouseenter', () => { remove.style.background = '#fbdde1'; });
+    remove.addEventListener('mouseleave', () => { remove.style.background = 'transparent'; });
+    remove.addEventListener('click', () => {
+      lists[key] = lists[key].filter(item => item !== entry);
+      render(key);
+      const field = byId(`${key}-input`);
+      if (field.getAttribute('aria-invalid') !== 'true') feedback(key, `Removed ${entry.text}.`, false);
+      markEdited();
+      field.focus();
+    });
+    chip.append(label, remove);
+    chips.append(chip);
+  }
+  byId(`${key}-count`).textContent = `${lists[key].length}`;
+  byId(`${key}-empty`).hidden = lists[key].length !== 0;
+}
+
+function feedback(key, message, isError) {
+  const field = byId(`${key}-input`);
+  const line = byId(`${key}-feedback`);
+  line.textContent = message;
+  line.style.color = isError ? '#a9202e' : '#626974';
+  field.setAttribute('aria-invalid', String(isError));
+  field.style.borderColor = isError ? '#ca4554' : '#c9cdd6';
+}
+
+function markEdited() {
+  session.routeRules = Object.fromEntries(keys.map(key => [key, lists[key].map(entry => entry.text)]));
+}
+
+function showList(selected) {
+  for (const key of keys) {
+    const active = selected === key;
+    byId(`${key}-panel`).hidden = !active;
+    const tab = byId(`${key}-tab`);
+    tab.setAttribute('aria-selected', String(active));
+    tab.tabIndex = active ? 0 : -1;
+    tab.style.background = active ? '#ffffff' : 'transparent';
+    tab.style.color = active ? '#172334' : '#526071';
+    tab.style.boxShadow = active ? '0 1px 3px #29394d2b' : 'none';
+  }
+}
+
+for (const key of keys) {
+  const other = keys.find(candidate => candidate !== key);
+  const field = byId(`${key}-input`);
+  const add = byId(`${key}-add`);
+  const tab = byId(`${key}-tab`);
+  tab.addEventListener('click', () => showList(key));
+  tab.addEventListener('keydown', event => {
+    if (!['ArrowLeft','ArrowRight'].includes(event.key)) return;
+    event.preventDefault(); showList(other); byId(`${other}-tab`).focus();
+  });
+  function toggleAdd() { add.disabled = !field.value.trim(); }
+  field.addEventListener('input', () => { feedback(key, hint, false); toggleAdd(); });
+  field.addEventListener('paste', event => {
+    const pasted = event.clipboardData.getData('text');
+    if (!/[\r\n\t]/.test(pasted)) return;
+    event.preventDefault();
+    field.setRangeText(pasted.replace(/[\r\n\t]+/g, ' '), field.selectionStart, field.selectionEnd, 'end');
+    toggleAdd();
+  });
+  byId(`${key}-form`).addEventListener('submit', event => {
+    event.preventDefault();
+    const tokens = field.value.split(/[\s,;]+/).filter(Boolean);
+    if (!tokens.length) return;
+    const rejected = [];
+    let added = 0;
+    for (const token of tokens) {
+      const result = validate(token, lists[key], lists[other], titles[other]);
+      if (result.error) rejected.push({token, message: result.error});
+      else { lists[key].push(result.entry); added += 1; }
+    }
+    field.value = rejected.map(item => item.token).join(', ');
+    const prefix = added ? `Added ${added}. ` : '';
+    const error = rejected.length ? `${rejected[0].message}${rejected.length > 1 ? ` +${rejected.length - 1} more.` : ''}` : '';
+    feedback(key, (prefix + error).trim(), !!rejected.length);
+    if (added) { render(key); markEdited(); }
+    toggleAdd(); field.focus();
+  });
+  render(key);
+}
+showList('vpn_only');
+
+function parseConfig(source) {
+  let config;
+  try { config = JSON.parse(source); }
+  catch { throw new Error('This file is not valid JSON. Check its brackets and commas.'); }
+  if (!config || typeof config !== 'object' || Array.isArray(config)
+    || !keys.every(key => Array.isArray(config[key]))
+    || Object.keys(config).some(key => ![...keys, 'vpn_profile'].includes(key))) {
+    throw new Error('The file must contain vpn_only and not_vpn_only lists.');
+  }
+  const profile = config.vpn_profile;
+  if (profile !== undefined && (typeof profile !== 'string'
+    || (!['auto','route'].includes(profile) && !/^[\da-f]{8}(?:-[\da-f]{4}){3}-[\da-f]{12}$/i.test(profile)))) {
+    throw new Error('The file contains an invalid VPN profile.');
+  }
+  const imported = {vpn_only: [], not_vpn_only: []};
+  for (const key of keys) {
+    const other = keys.find(candidate => candidate !== key);
+    for (const [index, value] of config[key].entries()) {
+      if (typeof value !== 'string' || !value.trim()) throw new Error(`${titles[key]}, entry ${index + 1}: enter an address.`);
+      const result = validate(value.trim(), imported[key], imported[other], titles[other]);
+      if (result.error) throw new Error(`${titles[key]}, entry ${index + 1}: ${result.error}`);
+      imported[key].push(result.entry);
+    }
+  }
+  return {imported, profile};
+}
+
+const status = byId('import-status');
+const profile = byId('vpn-profile');
+function showProfile(value) {
+  if (!['auto','route'].includes(value)) byId('custom-profile').value = value;
+  profile.value = value;
+}
+showProfile(session.routeProfile ?? 'auto');
+profile.addEventListener('change', () => { session.routeProfile = profile.value; });
+byId('launch-at-login').checked = !!session.routeLaunch;
+byId('launch-at-login').addEventListener('change', event => { session.routeLaunch = event.target.checked; });
+byId('choose-file').addEventListener('click', () => byId('import-file').click());
+byId('import-file').addEventListener('change', async event => {
+  const file = event.target.files[0];
+  if (!file) return;
+  event.target.value = '';
+  try {
+    if (file.size > 256 * 1024) throw new Error('Choose a JSON file smaller than 256 KB.');
+    const {imported, profile} = parseConfig(await file.text());
+    for (const key of keys) {
+      lists[key] = imported[key];
+      byId(`${key}-input`).value = '';
+      byId(`${key}-add`).disabled = true;
+      feedback(key, hint, false);
+      render(key);
+    }
+    if (profile !== undefined) { session.routeProfile = profile; showProfile(profile); }
+    markEdited();
+    status.style.color = '#16733c';
+    status.textContent = `Imported ${lists.vpn_only.length} VPN On Only and ${lists.not_vpn_only.length} VPN Off Only addresses.`;
+  } catch (error) {
+    status.style.color = '#a9202e';
+    status.textContent = error.message;
+  }
+});
+</script>
+</body></html>

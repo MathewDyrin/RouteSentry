@@ -1,0 +1,141 @@
+{
+  "v": 1,
+  "kind": "canvas",
+  "title": "RouteSentry · macOS",
+  "pages": [
+    {
+      "id": "app",
+      "name": "macOS app"
+    },
+    {
+      "id": "address-rules-v2",
+      "name": "Address rules v2"
+    },
+    {
+      "id": "macos-controls",
+      "name": "macOS · Protection & Settings"
+    },
+    {
+      "id": "dark-controls",
+      "name": "Dark · Protection & Settings"
+    }
+  ],
+  "artboards": {
+    "artboards/Rules.html": {
+      "x": 0,
+      "y": 0,
+      "w": 784,
+      "h": 606,
+      "title": "Rules window",
+      "page": "app",
+      "interactive": true
+    },
+    "artboards/Menu.html": {
+      "x": 864,
+      "y": 0,
+      "w": 336,
+      "h": 264,
+      "title": "Menu bar",
+      "page": "app",
+      "interactive": true
+    },
+    "artboards/Address-Rules.html": {
+      "x": 0,
+      "y": 0,
+      "w": 896,
+      "h": 666,
+      "title": "Address chips",
+      "page": "address-rules-v2",
+      "interactive": true
+    },
+    "artboards/Import-Config.html": {
+      "x": 976,
+      "y": 0,
+      "w": 896,
+      "h": 666,
+      "title": "Import preview",
+      "page": "address-rules-v2",
+      "interactive": true
+    },
+    "artboards/Apple-Home.html": {
+      "x": 0,
+      "y": 0,
+      "w": 440,
+      "h": 510,
+      "title": "Protection",
+      "page": "macos-controls",
+      "interactive": true
+    },
+    "artboards/Apple-Settings.html": {
+      "x": 520,
+      "y": 0,
+      "w": 676,
+      "h": 584,
+      "title": "Settings",
+      "page": "macos-controls",
+      "interactive": true
+    },
+    "artboards/Dark-Home.html": {
+      "x": 0,
+      "y": 0,
+      "w": 390,
+      "h": 740,
+      "title": "Protection · Dark",
+      "page": "dark-controls",
+      "interactive": true
+    },
+    "artboards/Dark-Settings.html": {
+      "x": 460,
+      "y": 0,
+      "w": 390,
+      "h": 740,
+      "title": "Settings · Dark",
+      "page": "dark-controls",
+      "interactive": true
+    },
+    "artboards/Dark-Profile.html": {
+      "x": 920,
+      "y": 0,
+      "w": 390,
+      "h": 740,
+      "title": "VPN Profile",
+      "page": "dark-controls",
+      "interactive": true
+    },
+    "artboards/Dark-VPN-On.html": {
+      "x": 1380,
+      "y": 0,
+      "w": 390,
+      "h": 740,
+      "title": "VPN On Only",
+      "page": "dark-controls",
+      "interactive": true
+    },
+    "artboards/Dark-VPN-Off.html": {
+      "x": 1840,
+      "y": 0,
+      "w": 390,
+      "h": 740,
+      "title": "VPN Off Only",
+      "page": "dark-controls",
+      "interactive": true
+    }
+  },
+  "order": [
+    "artboards/Rules.html",
+    "artboards/Menu.html",
+    "artboards/Address-Rules.html",
+    "artboards/Import-Config.html",
+    "artboards/Apple-Home.html",
+    "artboards/Apple-Settings.html",
+    "artboards/Dark-Home.html",
+    "artboards/Dark-Settings.html",
+    "artboards/Dark-Profile.html",
+    "artboards/Dark-VPN-On.html",
+    "artboards/Dark-VPN-Off.html"
+  ],
+  "launch": {
+    "view": "canvas",
+    "page": "dark-controls"
+  }
+}

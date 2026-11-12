@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>RouteSentry · Settings</title><style>
+@font-face { font-family:Geist;src:url(assets/Geist.woff2) format('woff2');font-weight:100 900; }
+* { box-sizing:border-box; }
+body, h1, p { margin:0; }
+[hidden] { display:none !important; }
+main { display:flex;flex-direction:column;overflow:hidden;border:1px solid #303030;border-radius:14px;background:#000;color:#ededed;color-scheme:dark;font:13px/1.45 Geist,system-ui,sans-serif; }
+header { display:grid;grid-template-columns:32px 1fr 32px;align-items:center;height:55px;flex:none;padding:0 20px; }
+h1 { display:flex;align-items:center;justify-content:center;gap:7px;text-align:center;font-size:14px;font-weight:620; }
+button, input { font:inherit; }
+button { cursor:pointer; }
+button:disabled { opacity:.46;cursor:default; }
+a:focus-visible, button:focus-visible, input:focus-visible { outline:2px solid #ededed;outline-offset:2px; }
+.back { display:grid;place-items:center;width:32px;height:32px;color:#d4d4d4;border-radius:8px; }
+.back:hover { background:#1c1c1c; }
+.content { flex:1;min-height:0;overflow:auto;padding:12px 24px 24px; }
+.row { display:flex;align-items:center;gap:10px;min-height:56px;padding:8px 0;border-bottom:1px solid #282828;color:#ededed;text-decoration:none;font-weight:570; }
+.content > .row:last-child { border-bottom:0; }
+a.row:hover, label.row:hover { color:#fff; }
+a.row:hover .row-end { color:#ededed; }
+.row-end { display:flex;align-items:center;gap:8px;margin-left:auto;color:#ababab;font-size:12px;font-weight:450; }
+.row-end svg { flex:none; }
+.row > svg, h1 > svg { flex:none;color:#d0d0d0; }
+.muted { color:#ababab;font-size:12px; }
+.row-description { display:flex;min-width:0;flex-direction:column;gap:3px; }
+.row-description .muted { font-weight:450;line-height:1.35; }
+.row-description + .row-end { flex-shrink:0;max-width:110px;text-align:right; }
+.button { min-height:38px;padding:0 12px;border:1px solid #4c4c4c;border-radius:8px;background:#111;color:#ededed;font-size:12px;font-weight:580;white-space:nowrap; }
+.button:hover:not(:disabled) { filter:brightness(1.18); }
+.button-primary { background:#f5f5f5;border-color:#f5f5f5;color:#151515; }
+.button-primary:hover:not(:disabled) { filter:brightness(.88); }
+.configuration-button { display:inline-flex;flex:none;align-items:center;justify-content:center;width:100px;min-height:34px;padding:0 9px;border-color:#383838;background:#101010;text-decoration:none; }
+.settings-version { flex:none;padding:14px 24px 22px;text-align:center; }
+.rule-content { padding-top:16px; }
+.chips { display:flex;align-items:flex-start;flex-wrap:wrap;gap:7px;margin-top:18px; }
+.chips:empty { margin-top:0; }
+.empty-list { margin-top:18px; }
+.rule-footer { flex:none;padding:12px 24px 24px; }
+.add-domain { display:flex;align-items:center;justify-content:center;gap:6px;width:100%;min-height:43px;font-size:13px; }
+.address-entry { display:flex;align-items:center;gap:8px; }
+.address-entry input { flex:1;min-width:0;height:43px;border:1px solid #4c4c4c;border-radius:8px;background:#0b0b0b;color:#ededed;padding:0 10px; }
+.address-entry input::placeholder { color:#969696; }
+.address-entry .button { min-height:43px; }
+.feedback { margin-top:7px;overflow-wrap:anywhere; }
+.feedback:empty { margin-top:0; }
+#import-status { margin:8px 0;overflow-wrap:anywhere; }
+#import-status:empty { display:none; }
+#launch-at-login { appearance:none;position:relative;flex:none;width:37px;height:22px;margin:0 0 0 auto;border:1px solid #4c4c4c;border-radius:999px;background:#252525;cursor:pointer; }
+#launch-at-login::after { content:"";position:absolute;left:3px;top:3px;width:14px;height:14px;border-radius:50%;background:#bdbdbd; }
+#launch-at-login:checked { border-color:#ededed;background:#ededed; }
+#launch-at-login:checked::after { transform:translateX(15px);background:#171717; }
+.profile-option { cursor:pointer; }
+.profile-option input { appearance:none;width:16px;height:16px;margin:0 0 0 auto;border:1px solid #767676;border-radius:50%;cursor:pointer; }
+.profile-option input:checked { border:5px solid #ededed; }
+</style></head><body>
+<main style="width:390px;height:740px">
+  <header>
+    <a class="back" href="artboards/Dark-Home.html" aria-label="Back to Protection" title="Back to Protection"><svg aria-hidden="true" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"><path d="m14 6-6 6 6 6"/></svg></a>
+    <h1><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M10 2h4l.55 2.6 1.7.7 2.2-1.45 2.8 2.8-1.45 2.2.7 1.7L23 11v2l-2.5.55-.7 1.7 1.45 2.2-2.8 2.8-2.2-1.45-1.7.7L14 22h-4l-.55-2.5-1.7-.7-2.2 1.45-2.8-2.8 1.45-2.2-.7-1.7L1 13v-2l2.5-.55.7-1.7-1.45-2.2 2.8-2.8 2.2 1.45 1.7-.7zM10.6 8.5h2.8l2.1 2.1v2.8l-2.1 2.1h-2.8l-2.1-2.1v-2.8z"/></svg>Settings</h1>
+  </header>
+
+  <div class="content">
+    <nav aria-label="VPN settings">
+      <a class="row" href="artboards/Dark-Profile.html">
+        <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M4 6h13l3 3v7H4zm3 3v2h7V9zm0 4v1.5h5V13zM7 18h13l-2 2H7z"/></svg><span class="row-description">
+          <span>VPN Profile</span><span class="muted">Choose which VPN to monitor.</span>
+        </span><span class="row-end"><span id="profile-summary">Automatic</span><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"><path d="m10 6 6 6-6 6"/></svg></span>
+      </a>
+      <a class="row" href="artboards/Dark-VPN-On.html">
+        <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M12 2.5 20 7v7.4L12 21.5l-8-7.1V7zm-4.6 9.6 3.2 3.3 6.2-6.1-1.4-1.4-4.8 4.7-1.8-1.9z"/></svg><span class="row-description">
+          <span>VPN On Only</span><span class="muted">Block these addresses outside the VPN tunnel.</span>
+        </span><span class="row-end"><span id="vpn_only-count">4 addresses</span><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"><path d="m10 6 6 6-6 6"/></svg></span>
+      </a>
+      <a class="row" href="artboards/Dark-VPN-Off.html">
+        <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M12 2.5 16.2 4.9 7.2 17.3 4 14.4V7zM18 5.9 20 7v7.4l-8 7.1-3.3-2.9z"/></svg><span class="row-description">
+          <span>VPN Off Only</span><span class="muted">Block these addresses while the VPN is connected.</span>
+        </span><span class="row-end"><span id="not_vpn_only-count">3 addresses</span><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"><path d="m10 6 6 6-6 6"/></svg></span>
+      </a>
+    </nav>
+    <label class="row" for="launch-at-login">
+      <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M5 5h8v2H7v10h6v2H5l-2-2V7zm12 2 5 5-5 5-1.5-1.5L18 13h-8v-2h8l-2.5-2.5z"/></svg><span class="row-description">
+        <span id="launch-label">Launch at Login</span>
+        <span class="muted" id="launch-description">Open RouteSentry when you log in to macOS.</span>
+      </span>
+      <input id="launch-at-login" type="checkbox" role="switch" aria-labelledby="launch-label" aria-describedby="launch-description">
+    </label>
+    <div class="row">
+      <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M5 3h9l5 5v13H5zm8 2v4h4zm-2 4v5H8l4 4 4-4h-3V9z"/></svg><span class="row-description">
+        <span>Import Configuration</span><span class="muted" id="import-description">Replace your address rules from a JSON file.</span>
+      </span>
+      <button id="choose-file" class="button row-end configuration-button" type="button" aria-describedby="import-description import-status">Choose File…</button>
+      <input id="import-file" type="file" accept=".json,application/json" aria-label="JSON configuration file" hidden>
+    </div>
+    <p id="import-status" class="muted" aria-live="polite"></p>
+    <div class="row">
+      <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M5 3h9l5 5v13H5zm8 2v4h4zM8 13h3v5h2v-5h3l-4-4z"/></svg><span class="row-description">
+        <span>Export Configuration</span><span class="muted" id="export-description">Save your rules and VPN profile as JSON.</span>
+      </span>
+      <a id="export-config" class="button row-end configuration-button" aria-describedby="export-description" download="routesentry-config.json">Save JSON</a>
+    </div>
+  </div>
+  <footer class="muted settings-version">Version 0.2.0 · Build 2</footer>
+</main>
+<script>const byId = id => document.getElementById(id);
+const keys = ['vpn_only', 'not_vpn_only'];
+const titles = {vpn_only: 'VPN On Only', not_vpn_only: 'VPN Off Only'};
+const profiles = {auto: 'Automatic', route: 'Routed tunnel'};
+const session = window.jc?.session ?? {};
+const sample = {vpn_only: ['example.com', 'api.example.com', 'status.example.com', '203.0.113.0/24'], not_vpn_only: ['intranet.example.net', 'printer.example.net', '192.0.2.10']};
+const saved = session.routeRules ?? sample;
+const lists = {vpn_only: saved.vpn_only.map(address), not_vpn_only: saved.not_vpn_only.map(address)};
+
+function address(token) {
+  const [host, bits, extra] = token.split('/');
+  if (extra !== undefined || (bits !== undefined && !/^\d{1,3}$/.test(bits))) return null;
+  let ip = null;
+  const v4 = host.split('.');
+  if (v4.length === 4 && v4.every(part => /^(0|[1-9]\d{0,2})$/.test(part) && Number(part) < 256)) {
+    ip = {version: 4, canonical: v4.join('.'), value: v4.reduce((value, part) => (value << 8n) + BigInt(part), 0n)};
+  } else if (/^[\da-f:.]+$/i.test(host) && host.includes(':')) {
+    try {
+      const canonical = new URL(`http://[${host}]/`).hostname.slice(1, -1);
+      const halves = canonical.split('::');
+      const left = halves[0] ? halves[0].split(':') : [];
+      const right = halves[1] ? halves[1].split(':') : [];
+      const groups = halves.length === 1 ? left : [...left, ...Array(8 - left.length - right.length).fill('0'), ...right];
+      ip = {version: 6, canonical, value: groups.reduce((value, part) => (value << 16n) + BigInt(`0x${part}`), 0n)};
+    } catch { return null; }
+  }
+  if (ip) {
+    const width = ip.version === 4 ? 32 : 128;
+    const prefix = bits === undefined ? width : Number(bits);
+    if (prefix > width) return null;
+    const span = 1n << BigInt(width - prefix);
+    if (ip.value % span !== 0n) return null;
+    return {text: bits === undefined ? ip.canonical : `${ip.canonical}/${prefix}`,
+      kind: ip.version, first: ip.value, last: ip.value + span - 1n};
+  }
+  if (bits !== undefined || /[\x00-\x20*%?#@:\[\]\\]/.test(host)) return null;
+  try {
+    const domain = new URL(`http://${host}/`).hostname.toLowerCase().replace(/\.$/, '');
+    const labels = domain.split('.');
+    if (domain.length > 253 || labels.length < 2 || /^\d+$/.test(labels.at(-1))
+      || labels.some(label => !/^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?$/.test(label))) return null;
+    return {text: domain, kind: 'domain'};
+  } catch { return null; }
+}
+
+function exactMatch(a, b) {
+  if (a.kind !== b.kind) return false;
+  return a.kind === 'domain' ? a.text === b.text : a.first === b.first && a.last === b.last;
+}
+
+function overlaps(a, b) {
+  if (a.kind !== b.kind) return false;
+  return a.kind === 'domain' ? a.text === b.text : a.first <= b.last && b.first <= a.last;
+}
+
+function validate(token, current, opposite, oppositeTitle) {
+  if (token.includes('://')) return {error: `Use the domain only for “${token}”.`};
+  const entry = address(token);
+  if (!entry) return {error: `“${token}” is not a valid domain, IP, or CIDR.`};
+  if (current.some(item => exactMatch(item, entry))) return {error: `“${entry.text}” is already in this list.`};
+  const conflict = opposite.find(item => overlaps(item, entry));
+  if (conflict) return {error: `“${entry.text}” overlaps “${conflict.text}” in ${oppositeTitle}.`};
+  return {entry};
+}
+
+function markEdited() {
+  session.routeRules = Object.fromEntries(keys.map(key => [key, lists[key].map(entry => entry.text)]));
+}
+
+function isConfigProfile(profile) {
+  return typeof profile === 'string'
+    && (Object.hasOwn(profiles, profile) || /^[\da-f]{8}(?:-[\da-f]{4}){3}-[\da-f]{12}$/i.test(profile));
+}
+
+function parseConfig(source) {
+  let config;
+  try { config = JSON.parse(source); }
+  catch { throw new Error('This file is not valid JSON. Check its brackets and commas.'); }
+  if (!config || typeof config !== 'object' || Array.isArray(config)
+    || !keys.every(key => Array.isArray(config[key]))
+    || Object.keys(config).some(key => ![...keys, 'vpn_profile'].includes(key))) {
+    throw new Error('The file must contain vpn_only and not_vpn_only lists.');
+  }
+  const profile = config.vpn_profile;
+  if (profile !== undefined && !isConfigProfile(profile)) {
+    throw new Error('The file contains an invalid VPN profile.');
+  }
+  const imported = {vpn_only: [], not_vpn_only: []};
+  for (const key of keys) {
+    const other = keys.find(candidate => candidate !== key);
+    for (const [index, value] of config[key].entries()) {
+      if (typeof value !== 'string' || !value.trim()) throw new Error(`${titles[key]}, entry ${index + 1}: enter an address.`);
+      const result = validate(value.trim(), imported[key], imported[other], titles[other]);
+      if (result.error) throw new Error(`${titles[key]}, entry ${index + 1}: ${result.error}`);
+      imported[key].push(result.entry);
+    }
+  }
+  return {imported, profile};
+}
+
+function setupSettings() {
+  const status = byId('import-status');
+  const launch = byId('launch-at-login');
+  const importFile = byId('import-file');
+  const exportFile = byId('export-config');
+  let exportUrl;
+
+  function updateSummary() {
+    const selected = session.routeProfile ?? 'auto';
+    byId('profile-summary').textContent = Object.hasOwn(profiles, selected) ? profiles[selected] : 'Specific VPN profile';
+    for (const key of keys) {
+      const count = lists[key].length;
+      byId(`${key}-count`).textContent = `${count} ${count === 1 ? 'address' : 'addresses'}`;
+    }
+    const config = Object.fromEntries(keys.map(key => [key, lists[key].map(entry => entry.text)]));
+    if (isConfigProfile(selected)) config.vpn_profile = selected;
+    if (exportUrl) URL.revokeObjectURL(exportUrl);
+    const json = JSON.stringify(config, null, 2) + '\n';
+    exportUrl = URL.createObjectURL(new Blob([json], {type: 'application/json'}));
+    exportFile.href = exportUrl;
+  }
+  updateSummary();
+  // Canvas handles artboard links globally. Leave this link's download to the browser.
+  exportFile.addEventListener('click', event => event.stopPropagation());
+  launch.checked = !!session.routeLaunch;
+  launch.addEventListener('change', () => { session.routeLaunch = launch.checked; });
+  byId('choose-file').addEventListener('click', () => importFile.click());
+  importFile.addEventListener('change', async () => {
+    const file = importFile.files[0];
+    if (!file) return;
+    importFile.value = '';
+    try {
+      if (file.size > 256 * 1024) throw new Error('Choose a JSON file smaller than 256 KB.');
+      const {imported, profile} = parseConfig(await file.text());
+      for (const key of keys) lists[key] = imported[key];
+      if (profile !== undefined) session.routeProfile = profile;
+      markEdited();
+      updateSummary();
+      status.textContent = `Imported ${lists.vpn_only.length} VPN On Only and ${lists.not_vpn_only.length} VPN Off Only addresses.`;
+    } catch (error) {
+      status.textContent = error.message;
+    }
+  });
+}
+
+setupSettings();
+</script></body></html>

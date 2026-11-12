@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Import config preview</title><style>body { margin: 0; } @font-face { font-family: Geist; src: url(assets/Geist.woff2) format('woff2'); font-weight: 100 900; } input::placeholder,textarea::placeholder { color:#999999; } button:disabled { opacity:.6; cursor:default; } [hidden] { display:none !important; }</style></head>
+<body>
+<main id="artboard" data-start-import="true" style="width:896px;height:666px;box-sizing:border-box;position:relative;overflow:hidden;border:1px solid #353535;border-radius:14px;background:#0a0a0a;color:#ededed;font-family:Geist,system-ui,sans-serif;color-scheme:dark">
+<div id="window-content" style="height:100%;display:flex;flex-direction:column">
+  <header style="height:39px;flex:none;display:flex;align-items:center;gap:7px;padding:0 16px;background:#111111;border-bottom:1px solid #272727;box-sizing:border-box">
+    <span style="width:10px;height:10px;border-radius:50%;background:#ff6059"></span><span style="width:10px;height:10px;border-radius:50%;background:#f4bd4e"></span><span style="width:10px;height:10px;border-radius:50%;background:#29ca6a"></span>
+    <span style="margin-left:8px;color:#a3a3a3;font-size:12px;font-weight:550">RouteSentry</span>
+  </header>
+  <div style="padding:20px 26px 16px;display:flex;flex-direction:column;gap:16px;flex:1;min-height:0;overflow:auto">
+    <div style="display:flex;align-items:center;gap:12px">
+      <img src="assets/icon.png" alt="" style="width:48px;height:48px">
+      <div style="display:flex;flex-direction:column;gap:3px"><h1 style="font-size:24px;font-weight:650;letter-spacing:-.75px;margin:0">RouteSentry</h1><p style="margin:0;color:#a3a3a3;font-size:12px">Firewall rules for your VPN.</p></div>
+      <div style="margin-left:auto;display:flex;align-items:center;gap:6px;border:1px solid #3a3a3a;border-radius:99px;padding:6px 10px;color:#d0d0d0;font-size:11px"><span style="width:6px;height:6px;border-radius:50%;background:#909090"></span>Protection off</div>
+    </div>
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 13px;border:1px solid #303030;border-radius:9px;background:#111111">
+      <div style="display:flex;align-items:center;gap:10px;min-width:0"><label for="vpn-profile" style="font-size:12px;font-weight:600">VPN profile</label><span style="color:#5b5b5b">·</span><span style="color:#a3a3a3;font-size:12px">Sota Connect</span><span style="color:#71df9c;font-size:11px">Connected</span></div>
+      <select id="vpn-profile" style="height:30px;min-width:136px;padding:0 8px;border:1px solid #535353;border-radius:6px;background:#181818;color:#ededed;font:12px Geist,system-ui"><option value="auto">Automatic</option><option value="route">Routed tunnel</option><option id="custom-profile" value="demo-profile">Specific VPN profile</option></select>
+    </div>
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:12px">
+      <h2 style="font-size:15px;letter-spacing:-.15px;font-weight:650;margin:0">Address rules</h2>
+      <button id="open-import" type="button" style="display:inline-flex;align-items:center;justify-content:center;gap:7px;height:34px;padding:0 12px;border:1px solid #535353;border-radius:7px;background:#191919;color:#ededed;font:550 12px Geist,system-ui,sans-serif;cursor:pointer;box-sizing:border-box;white-space:nowrap" jc-hover="background:#252525" jc-focus="outline:2px solid #8c8c8c;outline-offset:2px"><svg aria-hidden="true" viewBox="0 0 20 20" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13V3m-4 4 4-4 4 4M4 12v4a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1v-4"/></svg><span>Import config</span></button>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px">
+
+<section aria-labelledby="vpn_only-title" style="background:#111111;border:1px solid #303030;border-radius:10px;padding:16px;display:flex;flex-direction:column;gap:13px;min-width:0">
+  <div style="display:flex;align-items:start;justify-content:space-between;gap:10px">
+    <div style="display:flex;flex-direction:column;gap:4px;min-width:0">
+      <h3 id="vpn_only-title" style="margin:0;color:#ededed;font-size:14px;font-weight:650">VPN only</h3>
+      <p style="margin:0;color:#a3a3a3;font-size:12px;line-height:1.35">Block these addresses outside the VPN tunnel.</p>
+    </div>
+    <span id="vpn_only-count" aria-live="polite" style="font:12px ui-monospace,SFMono-Regular,monospace;color:#bdbdbd;background:#1c1c1c;border:1px solid #373737;border-radius:5px;padding:2px 6px;line-height:1.25">0</span>
+  </div>
+  <form id="vpn_only-form" style="display:flex;flex-direction:column;gap:8px;margin:0">
+    <label for="vpn_only-input" style="color:#cccccc;font-size:11px;font-weight:550">Add addresses</label>
+    <div style="display:flex;align-items:center;gap:8px">
+      <input id="vpn_only-input" type="text" placeholder="example.com, 203.0.113.10" autocomplete="off" spellcheck="false" aria-describedby="vpn_only-feedback" aria-invalid="false" style="min-width:0;flex:1;height:36px;box-sizing:border-box;padding:0 10px;border:1px solid #555555;border-radius:7px;background:#0a0a0a;color:#f0f0f0;font:12px ui-monospace,SFMono-Regular,monospace" jc-focus="outline:2px solid #8c8c8c;outline-offset:1px" jc-invalid="border-color:#c45b64">
+      <button type="submit" id="vpn_only-add" disabled style="display:inline-flex;align-items:center;justify-content:center;gap:7px;height:34px;padding:0 12px;border:1px solid #535353;border-radius:7px;background:#191919;color:#ededed;font:550 12px Geist,system-ui,sans-serif;cursor:pointer;box-sizing:border-box;white-space:nowrap;height:36px" jc-hover="background:#252525" jc-focus="outline:2px solid #8c8c8c;outline-offset:2px">+ Add</button>
+    </div>
+    <p id="vpn_only-feedback" aria-live="polite" style="margin:0;color:#a3a3a3;font-size:12px;font-size:11px;line-height:1.35;min-height:29px;overflow-wrap:anywhere">Press Enter or paste a list separated by commas, spaces, or new lines.</p>
+  </form>
+  <div style="position:relative;min-height:79px;padding-top:10px;border-top:1px solid #2e2e2e">
+    <div id="vpn_only-chips" aria-label="VPN only addresses" data-jc-opaque data-jc-label="Removable address chips" style="width:100%;height:72px;overflow:auto;display:flex;align-content:flex-start;align-items:flex-start;flex-wrap:wrap;gap:6px"></div>
+    <p id="vpn_only-empty" style="position:absolute;top:10px;left:0;margin:0;color:#a3a3a3;font-size:12px">No addresses yet.</p>
+  </div>
+</section>
+
+<section aria-labelledby="not_vpn_only-title" style="background:#111111;border:1px solid #303030;border-radius:10px;padding:16px;display:flex;flex-direction:column;gap:13px;min-width:0">
+  <div style="display:flex;align-items:start;justify-content:space-between;gap:10px">
+    <div style="display:flex;flex-direction:column;gap:4px;min-width:0">
+      <h3 id="not_vpn_only-title" style="margin:0;color:#ededed;font-size:14px;font-weight:650">Without VPN only</h3>
+      <p style="margin:0;color:#a3a3a3;font-size:12px;line-height:1.35">Block these addresses while the VPN is connected.</p>
+    </div>
+    <span id="not_vpn_only-count" aria-live="polite" style="font:12px ui-monospace,SFMono-Regular,monospace;color:#bdbdbd;background:#1c1c1c;border:1px solid #373737;border-radius:5px;padding:2px 6px;line-height:1.25">0</span>
+  </div>
+  <form id="not_vpn_only-form" style="display:flex;flex-direction:column;gap:8px;margin:0">
+    <label for="not_vpn_only-input" style="color:#cccccc;font-size:11px;font-weight:550">Add addresses</label>
+    <div style="display:flex;align-items:center;gap:8px">
+      <input id="not_vpn_only-input" type="text" placeholder="intranet.example.net" autocomplete="off" spellcheck="false" aria-describedby="not_vpn_only-feedback" aria-invalid="false" style="min-width:0;flex:1;height:36px;box-sizing:border-box;padding:0 10px;border:1px solid #555555;border-radius:7px;background:#0a0a0a;color:#f0f0f0;font:12px ui-monospace,SFMono-Regular,monospace" jc-focus="outline:2px solid #8c8c8c;outline-offset:1px" jc-invalid="border-color:#c45b64">
+      <button type="submit" id="not_vpn_only-add" disabled style="display:inline-flex;align-items:center;justify-content:center;gap:7px;height:34px;padding:0 12px;border:1px solid #535353;border-radius:7px;background:#191919;color:#ededed;font:550 12px Geist,system-ui,sans-serif;cursor:pointer;box-sizing:border-box;white-space:nowrap;height:36px" jc-hover="background:#252525" jc-focus="outline:2px solid #8c8c8c;outline-offset:2px">+ Add</button>
+    </div>
+    <p id="not_vpn_only-feedback" aria-live="polite" style="margin:0;color:#a3a3a3;font-size:12px;font-size:11px;line-height:1.35;min-height:29px;overflow-wrap:anywhere">Press Enter or paste a list separated by commas, spaces, or new lines.</p>
+  </form>
+  <div style="position:relative;min-height:79px;padding-top:10px;border-top:1px solid #2e2e2e">
+    <div id="not_vpn_only-chips" aria-label="Without VPN only addresses" data-jc-opaque data-jc-label="Removable address chips" style="width:100%;height:72px;overflow:auto;display:flex;align-content:flex-start;align-items:flex-start;flex-wrap:wrap;gap:6px"></div>
+    <p id="not_vpn_only-empty" style="position:absolute;top:10px;left:0;margin:0;color:#a3a3a3;font-size:12px">No addresses yet.</p>
+  </div>
+</section>
+    </div>
+    <p style="margin:-6px 0 0;color:#a3a3a3;font-size:12px;font-size:11px">Domains, IPv4, IPv6, and CIDR are accepted. Domain rules use known IP addresses.</p>
+    <label style="display:flex;align-items:center;justify-content:space-between;gap:14px;padding-top:10px;border-top:1px solid #303030;color:#e5e5e5;font-size:12px;font-weight:550"><span>Launch at login</span><input type="checkbox" aria-label="Launch at login" style="accent-color:#ededed;width:15px;height:15px"></label>
+  </div>
+  <footer style="height:56px;flex:none;box-sizing:border-box;padding:0 26px;display:flex;align-items:center;justify-content:space-between;border-top:1px solid #303030;background:#111111;gap:10px">
+    <span id="footer-status" aria-live="polite" style="color:#a3a3a3;font-size:12px">No unapplied changes</span>
+    <button id="apply-draft" type="button" disabled style="display:inline-flex;align-items:center;justify-content:center;gap:7px;height:34px;padding:0 12px;border:1px solid #535353;border-radius:7px;background:#191919;color:#ededed;font:550 12px Geist,system-ui,sans-serif;cursor:pointer;box-sizing:border-box;white-space:nowrap;background:#303030;color:#a3a3a3" jc-hover="background:#252525" jc-focus="outline:2px solid #8c8c8c;outline-offset:2px">Apply rules</button>
+  </footer>
+</div>
+<section id="import-dialog" role="dialog" aria-modal="true" aria-labelledby="import-title" hidden style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.72)">
+  <div style="width:510px;max-height:608px;overflow:auto;box-sizing:border-box;border:1px solid #444444;border-radius:12px;background:#121212;box-shadow:0 18px 60px #000000;display:flex;flex-direction:column;gap:15px;padding:20px">
+    <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px"><div style="display:flex;flex-direction:column;gap:5px"><h2 id="import-title" style="margin:0;font-size:20px;letter-spacing:-.35px;font-weight:650">Import config</h2><p style="margin:0;color:#a3a3a3;font-size:12px">Choose a RouteSentry JSON file or paste its contents.</p></div>
+    <button id="close-import" type="button" aria-label="Close import" style="display:inline-flex;align-items:center;justify-content:center;gap:7px;height:34px;padding:0 12px;border:1px solid #535353;border-radius:7px;background:#191919;color:#ededed;font:550 12px Geist,system-ui,sans-serif;cursor:pointer;box-sizing:border-box;white-space:nowrap;padding:0;width:32px;font-size:18px" jc-hover="background:#252525" jc-focus="outline:2px solid #8c8c8c;outline-offset:2px">×</button></div>
+    <div style="display:flex;align-items:center;gap:10px"><button id="choose-file" type="button" style="display:inline-flex;align-items:center;justify-content:center;gap:7px;height:34px;padding:0 12px;border:1px solid #535353;border-radius:7px;background:#191919;color:#ededed;font:550 12px Geist,system-ui,sans-serif;cursor:pointer;box-sizing:border-box;white-space:nowrap" jc-hover="background:#252525" jc-focus="outline:2px solid #8c8c8c;outline-offset:2px"><svg aria-hidden="true" viewBox="0 0 20 20" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13V3m-4 4 4-4 4 4M4 12v4a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1v-4"/></svg><span>Choose file…</span></button><input id="import-file" type="file" accept=".json,application/json" aria-label="JSON config file" hidden><span style="color:#a3a3a3;font-size:12px;font-size:11px">.json</span></div>
+    <div style="display:flex;flex-direction:column;gap:7px"><label for="import-json" style="color:#cccccc;font-size:12px;font-weight:550">Config JSON</label><textarea id="import-json" aria-describedby="import-error" spellcheck="false" aria-invalid="false" placeholder="Paste JSON here" style="width:100%;height:162px;resize:vertical;min-height:110px;max-height:230px;padding:10px;box-sizing:border-box;background:#0a0a0a;color:#ededed;border:1px solid #555555;border-radius:7px;font:12px ui-monospace,SFMono-Regular,monospace;line-height:1.4" jc-focus="outline:2px solid #8c8c8c;outline-offset:1px" jc-invalid="border-color:#c45b64"></textarea></div>
+    <p id="import-error" aria-live="polite" hidden style="margin:0;color:#ff9ca1;font-size:12px;line-height:1.4;overflow-wrap:anywhere"></p>
+    <div id="import-preview" hidden style="display:flex;flex-direction:column;gap:9px;padding:11px;border:1px solid #3a3a3a;border-radius:8px;background:#181818">
+      <span style="font-size:12px;font-weight:600">Ready to import</span>
+      <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;color:#a3a3a3;font-size:11px"><span>VPN only <strong id="preview-vpn" style="margin-left:3px;color:#ededed">0</strong></span><span>Without VPN <strong id="preview-no-vpn" style="margin-left:3px;color:#ededed">0</strong></span><span id="preview-profile" style="color:#ededed">Automatic</span></div>
+    </div>
+    <p style="margin:0;color:#a3a3a3;font-size:12px;font-size:11px;line-height:1.4">Import replaces the draft lists. Use Apply rules to update the firewall.</p>
+    <div style="display:flex;align-items:center;justify-content:flex-end;gap:8px;border-top:1px solid #303030;padding-top:13px">
+      <button id="cancel-import" type="button" style="display:inline-flex;align-items:center;justify-content:center;gap:7px;height:34px;padding:0 12px;border:1px solid #535353;border-radius:7px;background:#191919;color:#ededed;font:550 12px Geist,system-ui,sans-serif;cursor:pointer;box-sizing:border-box;white-space:nowrap" jc-hover="background:#252525" jc-focus="outline:2px solid #8c8c8c;outline-offset:2px">Cancel</button>
+      <button id="confirm-import" type="button" disabled style="display:inline-flex;align-items:center;justify-content:center;gap:7px;height:34px;padding:0 12px;border:1px solid #535353;border-radius:7px;background:#191919;color:#ededed;font:550 12px Geist,system-ui,sans-serif;cursor:pointer;box-sizing:border-box;white-space:nowrap;background:#303030;color:#a3a3a3" jc-hover="background:#252525" jc-focus="outline:2px solid #8c8c8c;outline-offset:2px">Import into draft</button>
+    </div>
+  </div>
+</section>
+</main>
+<script>const byId = id => document.getElementById(id);
+const keys = ['vpn_only', 'not_vpn_only'];
+const titles = {vpn_only: 'VPN only', not_vpn_only: 'Without VPN only'};
+const lists = {vpn_only: [], not_vpn_only: []};
+const dialog = byId('import-dialog');
+let pending = null;
+
+function address(token) {
+  const [host, bits, extra] = token.split('/');
+  if (extra !== undefined || (bits !== undefined && !/^\d{1,3}$/.test(bits))) return null;
+  let ip = null;
+  const v4 = host.split('.');
+  if (v4.length === 4 && v4.every(part => /^(0|[1-9]\d{0,2})$/.test(part) && Number(part) < 256)) {
+    ip = {version: 4, canonical: v4.join('.'), value: v4.reduce((value, part) => (value << 8n) + BigInt(part), 0n)};
+  } else if (/^[\da-f:.]+$/i.test(host) && host.includes(':')) {
+    try {
+      const canonical = new URL(`http://[${host}]/`).hostname.slice(1, -1);
+      const halves = canonical.split('::');
+      const left = halves[0] ? halves[0].split(':') : [];
+      const right = halves[1] ? halves[1].split(':') : [];
+      const groups = halves.length === 1 ? left : [...left, ...Array(8 - left.length - right.length).fill('0'), ...right];
+      ip = {version: 6, canonical, value: groups.reduce((value, part) => (value << 16n) + BigInt(`0x${part}`), 0n)};
+    } catch { return null; }
+  }
+  if (ip) {
+    const width = ip.version === 4 ? 32 : 128;
+    const prefix = bits === undefined ? width : Number(bits);
+    if (prefix > width) return null;
+    const span = 1n << BigInt(width - prefix);
+    if (ip.value % span !== 0n) return null;
+    return {text: bits === undefined ? ip.canonical : `${ip.canonical}/${prefix}`,
+      kind: ip.version, first: ip.value, last: ip.value + span - 1n};
+  }
+  if (bits !== undefined || /[\x00-\x20*%?#@:\[\]\\]/.test(host)) return null;
+  try {
+    const domain = new URL(`http://${host}/`).hostname.toLowerCase().replace(/\.$/, '');
+    const labels = domain.split('.');
+    if (domain.length > 253 || labels.length < 2 || /^\d+$/.test(labels.at(-1))
+      || labels.some(label => !/^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?$/.test(label))) return null;
+    return {text: domain, kind: 'domain'};
+  } catch { return null; }
+}
+
+function exactMatch(a, b) {
+  if (a.kind !== b.kind) return false;
+  return a.kind === 'domain' ? a.text === b.text : a.first === b.first && a.last === b.last;
+}
+
+function overlaps(a, b) {
+  if (a.kind !== b.kind) return false;
+  return a.kind === 'domain' ? a.text === b.text : a.first <= b.last && b.first <= a.last;
+}
+
+function validate(token, current, opposite, oppositeTitle) {
+  if (token.includes('://')) return {error: `Use the domain only for “${token}”.`};
+  const entry = address(token);
+  if (!entry) return {error: `“${token}” is not a valid domain, IP, or CIDR.`};
+  if (current.some(item => exactMatch(item, entry))) return {error: `“${entry.text}” is already in this list.`};
+  const conflict = opposite.find(item => overlaps(item, entry));
+  if (conflict) return {error: `“${entry.text}” overlaps “${conflict.text}” in ${oppositeTitle}.`};
+  return {entry};
+}
+
+function render(key) {
+  const chips = byId(`${key}-chips`);
+  chips.replaceChildren();
+  for (const entry of lists[key]) {
+    const chip = document.createElement('span');
+    chip.setAttribute('style', 'display:inline-flex;align-items:center;gap:5px;min-width:0;max-width:100%;height:31px;padding:0 4px 0 9px;background:#1a1a1a;border:1px solid #414141;border-radius:6px;box-sizing:border-box');
+    const label = document.createElement('span');
+    label.textContent = entry.text;
+    label.title = entry.text;
+    label.setAttribute('style', 'font:12px ui-monospace,monospace;overflow:hidden;text-overflow:ellipsis;white-space:nowrap');
+    const remove = document.createElement('button');
+    remove.type = 'button';
+    remove.setAttribute('aria-label', `Remove ${entry.text}`);
+    remove.setAttribute('style', 'width:22px;height:22px;flex:none;padding:0;border:0;border-radius:4px;background:transparent;color:#ff8288;font:18px/1 system-ui;cursor:pointer');
+    remove.textContent = '×';
+    remove.addEventListener('mouseenter', () => { remove.style.background = '#39191e'; });
+    remove.addEventListener('mouseleave', () => { remove.style.background = 'transparent'; });
+    remove.addEventListener('click', () => {
+      lists[key] = lists[key].filter(item => item !== entry);
+      render(key);
+      const field = byId(`${key}-input`);
+      if (field.getAttribute('aria-invalid') !== 'true') feedback(key, `Removed ${entry.text}.`, false);
+      markEdited();
+      field.focus();
+    });
+    chip.append(label, remove);
+    chips.append(chip);
+  }
+  byId(`${key}-count`).textContent = `${lists[key].length}`;
+  byId(`${key}-empty`).hidden = lists[key].length !== 0;
+}
+
+function feedback(key, message, isError) {
+  const field = byId(`${key}-input`);
+  const line = byId(`${key}-feedback`);
+  line.textContent = message;
+  line.style.color = isError ? '#ff9ca1' : '#a3a3a3';
+  field.setAttribute('aria-invalid', String(isError));
+  field.style.borderColor = isError ? '#c45b64' : '#555555';
+}
+
+function markEdited() {
+  byId('footer-status').textContent = 'Unapplied changes';
+  byId('apply-draft').disabled = false;
+  byId('apply-draft').style.background = '#ededed';
+  byId('apply-draft').style.color = '#111111';
+}
+
+const examples = {vpn_only: ['example.com', 'api.example.com', '203.0.113.0/24'],
+  not_vpn_only: ['intranet.example.net', '192.0.2.10']};
+for (const key of keys) {
+  const other = keys.find(candidate => candidate !== key);
+  const field = byId(`${key}-input`);
+  const add = byId(`${key}-add`);
+  lists[key] = examples[key].map(address);
+  render(key);
+  function toggleAdd() { add.disabled = !field.value.trim(); }
+  field.addEventListener('input', () => {
+    feedback(key, 'Press Enter or paste a list separated by commas, spaces, or new lines.', false);
+    toggleAdd();
+  });
+  field.addEventListener('paste', event => {
+    const pasted = event.clipboardData.getData('text');
+    if (!/[\r\n\t]/.test(pasted)) return;
+    event.preventDefault();
+    field.setRangeText(pasted.replace(/[\r\n\t]+/g, ' '), field.selectionStart, field.selectionEnd, 'end');
+    feedback(key, 'Press Enter to add the pasted addresses.', false);
+    toggleAdd();
+  });
+  byId(`${key}-form`).addEventListener('submit', event => {
+    event.preventDefault();
+    const tokens = field.value.split(/[\s,;]+/).filter(Boolean);
+    if (!tokens.length) return;
+    const rejected = [];
+    let added = 0;
+    for (const token of tokens) {
+      const result = validate(token, lists[key], lists[other], titles[other]);
+      if (result.error) rejected.push({token, message: result.error});
+      else { lists[key].push(result.entry); added += 1; }
+    }
+    field.value = rejected.map(item => item.token).join(', ');
+    const summary = added ? `Added ${added}. ` : '';
+    const errorMessage = rejected.length ? `${rejected[0].message}${rejected.length > 1 ? ` +${rejected.length - 1} more.` : ''}` : '';
+    feedback(key, summary + errorMessage, !!rejected.length);
+    if (added) { render(key); markEdited(); }
+    toggleAdd();
+    field.focus();
+  });
+}
+
+function openImport() {
+  dialog.hidden = false;
+  byId('window-content').inert = true;
+  byId('import-json').focus();
+}
+
+function closeImport() {
+  dialog.hidden = true;
+  byId('window-content').inert = false;
+  byId('open-import').focus();
+}
+
+function inspectConfig() {
+  const field = byId('import-json');
+  const message = byId('import-error');
+  const confirm = byId('confirm-import');
+  pending = null;
+  confirm.disabled = true;
+  confirm.style.background = '#303030';
+  confirm.style.color = '#a3a3a3';
+  byId('import-preview').hidden = true;
+  message.hidden = true;
+  field.setAttribute('aria-invalid', 'false');
+  if (!field.value.trim()) return;
+  try {
+    let config;
+    try { config = JSON.parse(field.value); }
+    catch { throw new Error('Invalid JSON. Check the brackets, quotes, and commas.'); }
+    if (!config || typeof config !== 'object' || Array.isArray(config)
+      || !keys.every(key => Array.isArray(config[key]))
+      || Object.keys(config).some(key => ![...keys, 'vpn_profile'].includes(key))) {
+      throw new Error('Expected vpn_only and not_vpn_only arrays, with optional vpn_profile.');
+    }
+    const profile = config.vpn_profile;
+    if (profile !== undefined && (typeof profile !== 'string'
+      || (!['auto', 'route'].includes(profile) && !/^[\da-f]{8}(?:-[\da-f]{4}){3}-[\da-f]{12}$/i.test(profile)))) {
+      throw new Error('vpn_profile must be auto, route, or a macOS VPN profile ID.');
+    }
+    const imported = {vpn_only: [], not_vpn_only: []};
+    for (const key of keys) {
+      const other = keys.find(candidate => candidate !== key);
+      for (const [index, value] of config[key].entries()) {
+        if (typeof value !== 'string' || !value.trim()) throw new Error(`${key}[${index + 1}] must be a nonempty string.`);
+        const result = validate(value.trim(), imported[key], imported[other], titles[other]);
+        if (result.error) throw new Error(`${key}[${index + 1}]: ${result.error}`);
+        imported[key].push(result.entry);
+      }
+    }
+    pending = {imported, profile};
+    byId('preview-vpn').textContent = `${imported.vpn_only.length}`;
+    byId('preview-no-vpn').textContent = `${imported.not_vpn_only.length}`;
+    byId('preview-profile').textContent = profile === undefined ? 'Keep current' : profile === 'auto' ? 'Automatic' : profile === 'route' ? 'Routed tunnel' : 'Specific profile';
+    byId('import-preview').hidden = false;
+    confirm.disabled = false;
+    confirm.style.background = '#ededed';
+    confirm.style.color = '#111111';
+  } catch (error) {
+    message.textContent = error.message;
+    message.hidden = false;
+    field.setAttribute('aria-invalid', 'true');
+  }
+}
+
+byId('open-import').addEventListener('click', openImport);
+byId('cancel-import').addEventListener('click', closeImport);
+byId('close-import').addEventListener('click', closeImport);
+dialog.addEventListener('keydown', event => { if (event.key === 'Escape') { event.stopPropagation(); closeImport(); } });
+byId('import-json').addEventListener('input', inspectConfig);
+byId('choose-file').addEventListener('click', () => byId('import-file').click());
+byId('import-file').addEventListener('change', async event => {
+  const file = event.target.files[0];
+  if (!file) return;
+  event.target.value = '';
+  if (file.size > 256 * 1024) {
+    byId('import-json').value = '';
+    inspectConfig();
+    byId('import-error').textContent = 'Choose a JSON file smaller than 256 KB.';
+    byId('import-error').hidden = false;
+    return;
+  }
+  try {
+    byId('import-json').value = await file.text();
+    inspectConfig();
+  } catch {
+    byId('import-json').value = '';
+    inspectConfig();
+    byId('import-error').textContent = 'Could not read this file.';
+    byId('import-error').hidden = false;
+  }
+});
+byId('confirm-import').addEventListener('click', () => {
+  if (!pending) return;
+  for (const key of keys) {
+    lists[key] = pending.imported[key];
+    byId(`${key}-input`).value = '';
+    byId(`${key}-add`).disabled = true;
+    feedback(key, 'Press Enter or paste a list separated by commas, spaces, or new lines.', false);
+    render(key);
+  }
+  if (pending.profile) {
+    const select = byId('vpn-profile');
+    if (!['auto', 'route'].includes(pending.profile)) byId('custom-profile').value = pending.profile;
+    select.value = pending.profile;
+  }
+  markEdited();
+  byId('footer-status').textContent = 'Config imported into the draft.';
+  closeImport();
+});
+byId('vpn-profile').addEventListener('change', markEdited);
+byId('apply-draft').addEventListener('click', () => {
+  byId('footer-status').textContent = 'Prototype only. No firewall rules were changed.';
+});
+if (byId('artboard').dataset.startImport === 'true') {
+  byId('import-json').value = JSON.stringify({vpn_only: ['example.com', '203.0.113.0/24'],
+    not_vpn_only: ['intranet.example.net'], vpn_profile: 'auto'}, null, 2);
+  inspectConfig();
+  openImport();
+}
+</script>
+</body></html>
