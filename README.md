@@ -23,7 +23,7 @@ RouteSentry uses the macOS packet filter, PF. Your VPN client manages the connec
 
 Requires **macOS 14 or later** on Apple Silicon or Intel, administrator access to change the firewall, and Python 3 at `/usr/bin/python3` for the firewall service. Install Apple’s Command Line Tools if macOS prompts for them. [Apple’s Command Line Tools guide](https://developer.apple.com/documentation/xcode/installing-the-command-line-tools)
 
-1. Download the DMG from [Releases → Assets](https://github.com/MathewDyrin/RouteSentry/releases). Version 0.3.1 is a preview build with an ad hoc signature. You can also [build from source](#build-from-source).
+1. Download the DMG from [Releases → Assets](https://github.com/MathewDyrin/RouteSentry/releases). The v0.3.1 DMG uses an ad hoc signature and has no Apple notarization. You can also [build from source](#build-from-source).
 2. Open the DMG and drag **RouteSentry** to **Applications**. Open the copy in Applications.
 3. Open **Settings → VPN Profile**. Start with **Automatic**, or choose your VPN profile if several are active. Choose **Routed tunnel** for a full-tunnel VPN that lacks a system profile.
 4. Open **VPN On Only** or **VPN Off Only**, select **Add Domain**, and enter a hostname, IP address, or CIDR. Separate several entries with commas and select **Save**.

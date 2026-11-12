@@ -23,7 +23,7 @@ RouteSentry использует встроенный пакетный филь�
 
 Нужны **macOS 14 или новее** на Apple Silicon или Intel, права администратора для изменения правил файрвола и Python 3 по пути `/usr/bin/python3` для фоновой службы. Если macOS предложит установить Command Line Tools, установи их. [Инструкция Apple](https://developer.apple.com/documentation/xcode/installing-the-command-line-tools)
 
-1. Скачай DMG из [Releases → Assets](https://github.com/MathewDyrin/RouteSentry/releases). Версия 0.3.1 — предварительная сборка с локальной подписью. Можно также [собрать приложение из исходников](#сборка-из-исходников).
+1. Скачай DMG из [Releases → Assets](https://github.com/MathewDyrin/RouteSentry/releases). DMG версии 0.3.1 подписан локальной подписью без нотарификации Apple. Можно также [собрать приложение из исходников](#сборка-из-исходников).
 2. Открой DMG, перетащи **RouteSentry** в **Applications** и запусти копию из этой папки.
 3. Открой **Settings → VPN Profile**. Начни с **Automatic**. Если активно несколько VPN, выбери нужный профиль. Для VPN без системного профиля, который направляет весь трафик через туннель, выбери **Routed tunnel**.
 4. Открой **VPN On Only** или **VPN Off Only**, нажми **Add Domain** и введи домен, IP-адрес или подсеть в формате CIDR. Несколько адресов можно разделить запятыми. Нажми **Save**.
